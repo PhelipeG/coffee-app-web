@@ -78,22 +78,23 @@ export const Price = styled.div`
   }
 `;
 
-export const Order = styled.div<{ $itemAdded?: boolean }>`
+export const Order = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+export const ButtonCart = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors["yellow-dark"]};
+  height: 40px;
+  width: 40px;
+  border: 0;
+  border-radius: 6px;
 
-  > button {
-    background-color: ${({ theme, $itemAdded }) =>
-      $itemAdded ? theme.colors["yellow-dark"] : theme.colors["purple-dark"]};
-    transition: background-color 0.2s;
-    border-radius: 6px;
-    padding: 8px;
-    display: flex;
-
-    &:hover {
-      background-color: ${({ theme, $itemAdded }) =>
-        $itemAdded ? theme.colors.yellow : theme.colors.purple};
-    }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors["yellow-light"]};
   }
 `;

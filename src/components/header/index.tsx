@@ -5,7 +5,6 @@ import { useCartStore } from "../../store/cartStore";
 
 export function Header() {
   const { cart } = useCartStore();
-  console.log(cart);
   return (
     <Container>
       <Link to="/">
@@ -17,7 +16,7 @@ export function Header() {
           <span>Caxias,MA</span>
         </div>
 
-        <Link to={"/cart"} aria-disabled="true">
+        <Link to="/cart" aria-disabled={cart.length === 0}>
           <ShoppingCart size={22} width="fill" />
           <span>{cart.length}</span>
         </Link>

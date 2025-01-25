@@ -1,7 +1,8 @@
-import { CheckFat } from "@phosphor-icons/react";
-import { Coffee, useCartStore } from "../../store/cartStore";
+import { CheckFat, ShoppingCart } from "@phosphor-icons/react";
+import { useCartStore } from "../../store/cartStore";
 import { QuantityInput } from "../quantityInput";
 import {
+  ButtonCart,
   CoffeeImg,
   Container,
   Control,
@@ -12,20 +13,33 @@ import {
   Title,
 } from "./styles";
 import { useTheme } from "styled-components";
+import { useState } from "react";
 
 interface CoffeeCardProps {
-  coffee: Coffee;
+  coffee: {
+    id: string;
+    title: string;
+    description: string;
+    tags: string[];
+    price: number;
+    image: string;
+  };
 }
-
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const { addToCart, removeItem } = useCartStore();
+  const { addToCart } = useCartStore();
+  const [quantity, setQuantity] = useState(1);
   const theme = useTheme();
 
-  function handleAddToCart() {
-    addToCart(coffee);
+  function incrementQuantity() {
+    setQuantity((prev) => prev + 1);
   }
-  function handleRemoveFromCart() {
-    removeItem(coffee.id);
+  function decrementQuantity() {
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
+  }
+  function handleAddToCart() {
+    addToCart({ coffee, quantity });
   }
 
   return (
@@ -46,13 +60,14 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
         <Order>
           <QuantityInput
-            quantity={1}
-            incrementQuantity={handleAddToCart}
-            decrementQuantity={handleRemoveFromCart}
+            quantity={quantity}
+            incrementQuantity={incrementQuantity}
+            decrementQuantity={decrementQuantity}
           />
           <CheckFat weight="fill" size={22} color={theme.colors["base-card"]} />
-          {/* <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
-          <button onClick={handleRemoveFromCart}>Remover do carrinho</button> */}
+          <ButtonCart onClick={handleAddToCart}>
+            <ShoppingCart size={22} color={theme.colors["base-card"]} />
+          </ButtonCart>
         </Order>
       </Control>
     </Container>
