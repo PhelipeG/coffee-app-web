@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -21,6 +20,16 @@ interface Order {
   id: string;
   items: CartItem[];
   total: number;
+  address: {
+    cep: string;
+    street: string;
+    number: string;
+    fullAddress: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+  };
+  paymentMethod: string;
 }
 // estado do carrinho
 interface CoffeeState {
@@ -31,12 +40,12 @@ interface CoffeeState {
   removeFromCart: (id: string) => void;
   incrementItemQuantity: (id: string) => void;
   decrementItemQuantity: (id: string) => void;
-  checkout: (order: Omit<Order, "id">) => void;
+  checkout: (order: Omit<Order, "id">) => { id: string };
 }
 
 export const useCartStore = create<CoffeeState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       coffee: [],
       cart: [],
       orders: [],
@@ -77,11 +86,18 @@ export const useCartStore = create<CoffeeState>()(
               : cartItem
           ),
         })),
-      checkout: (order) =>
+      checkout: (order) => {
+        const newOrder = {
+          ...order,
+          id: Math.floor(Math.random() * 1000).toString(),
+        };
         set((state) => ({
-          orders: [...state.orders, { ...order, id: new Date().toISOString() }],
+          orders: [...state.orders, newOrder],
           cart: [],
-        })),
+        }));
+        console.log(newOrder);
+        return newOrder;
+      },
     }),
     {
       name: "@coffee-delivery:cart-state-1.0.0",

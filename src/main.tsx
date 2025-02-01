@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/order/:orderId/success",
+        path: "/success/:id",
         element: <Success />,
       },
     ],
@@ -29,7 +28,5 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+  <RouterProvider router={router} />
 );

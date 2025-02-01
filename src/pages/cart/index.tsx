@@ -32,12 +32,13 @@ import { Fragment } from "react";
 import { useCartStore } from "../../store/cartStore";
 import { QuantityInput } from "../../components/quantityInput";
 import { coffees } from "../../data/data.json";
+import { useNavigate } from "react-router";
 
 type FormInputs = {
   cep: string;
   street: string;
   number: string;
-  fullAddress?: string;
+  fullAddress: string;
   neighborhood: string;
   city: string;
   state: string;
@@ -66,6 +67,7 @@ const newOrder = z.object({
 export type OrderInfo = z.infer<typeof newOrder>;
 
 export default function Cart() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -74,8 +76,13 @@ export default function Cart() {
   } = useForm<FormInputs>({
     resolver: zodResolver(newOrder),
   });
-  const { cart, incrementItemQuantity, decrementItemQuantity, removeFromCart } =
-    useCartStore();
+  const {
+    cart,
+    incrementItemQuantity,
+    decrementItemQuantity,
+    removeFromCart,
+    checkout,
+  } = useCartStore();
   const shippingPrice = 3.5;
   const coffeesInCart = cart.map((item) => {
     const coffeeInfo = coffees.find((coffee) => coffee.id === item.coffee.id);
@@ -92,6 +99,7 @@ export default function Cart() {
     0
   );
   const selectedPaymentMethod = watch("paymentMethod");
+
   function handleItemIncrement(id: string) {
     incrementItemQuantity(id);
   }
@@ -102,7 +110,26 @@ export default function Cart() {
     removeFromCart(id);
   }
   function handleCheckout(data: FormInputs) {
-    console.log(data);
+    if (coffeesInCart.length === 0) {
+      alert("Adicione itens ao carrinho");
+      return;
+    }
+    const order = checkout({
+      items: cart,
+      total: totalItemsPrice + shippingPrice,
+      address: {
+        cep: data.cep,
+        street: data.street,
+        number: data.number,
+        fullAddress: data.fullAddress,
+        neighborhood: data.neighborhood,
+        city: data.city,
+        state: data.state,
+      },
+      paymentMethod: data.paymentMethod,
+    });
+
+    navigate(`/success/${order.id}`);
   }
 
   return (
