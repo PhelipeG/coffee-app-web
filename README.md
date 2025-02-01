@@ -1,6 +1,14 @@
-# Coffee Web :rocket:
+# Coffee Delivery Web :rocket:
 
-![Logo do Projeto](https://raw.githubusercontent.com/tavareshenrique/ignite-reactjs-challenge-02-coffee-delivery/495cc5aa91e78c394a507eb389ca72fb389fb499/src/assets/img/logo.svg "Logo do Projeto")
+<h1 align="center">
+  <img
+    src="https://raw.githubusercontent.com/tavareshenrique/ignite-reactjs-challenge-02-coffee-delivery/495cc5aa91e78c394a507eb389ca72fb389fb499/src/assets/img/logo.svg"
+    title="Logo Coffee Delivery"
+    alt="Logo Coffee Delivery"
+    width="30px"
+  />
+  Coffee Delivery
+</h1>
 
 ---
 
@@ -11,6 +19,16 @@ O projeto é um ecommerce on-line de cafés com a opção de delivery, onde o us
 A aplicação foi desenvolvida com React(ViteJs) + Typescript e como desafio do módulo 2 do bootcamp Ignite - 2022. Neste projeto foi aplicado diversos conhecimentos visto no módulo como: Context API, layout default, rotas, formulários com React-Hook-Form, hooks (useState e useEffect), fui um pouco além e utilizei para gerenciamento de dados o Zustand e aperfeicoei os fundamentos básicos da ferramenta como por exemplo a componentização.
 
 ---
+
+### Pré-requisitos
+
+Antes de baixar o projeto você vai precisar ter instalado na sua máquina as seguintes ferramentas:
+
+- [Git](https://git-scm.com)
+- [NodeJS](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/) ou [NPM](https://www.npmjs.com/)
+
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
 ## Funcionalidades :white_check_mark:
 
