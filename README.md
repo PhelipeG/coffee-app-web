@@ -29,7 +29,7 @@ A aplicação foi desenvolvida com React(ViteJs) + Typescript e como desafio do 
 
 ### Página de Detalhes
 
-![Página de Detalhes]( "Página de Detalhes da Aplicação")
+![Página de Detalhes](https://github.com/user-attachments/assets/97a4827b-8fe6-4fce-8fae-30ca0f7cd798 "Página de Detalhes da Aplicação")
 
 ---
 
